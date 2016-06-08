@@ -84,6 +84,9 @@ rs=null;
             console.log(id);
             $.ajax({url: "ViewCustomerAjax.jsp", success: function(result){
             //$("#div1").html(result);
+            $('#myModal').on('shown.bs.modal', function () {
+             $('#myInput').focus()
+})
             console.log(result);
             }});
 ;
@@ -92,7 +95,11 @@ rs=null;
 
 </head>
 
+
 <body>
+   
+    
+    
 
     <div id="wrapper">
 
@@ -100,9 +107,9 @@ rs=null;
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <div class="container-fl">
 
-                <!-- Page Heading -->
+                <Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
@@ -123,6 +130,38 @@ rs=null;
                 <div class="row">
                     
                     <div class="col-lg-12">
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div id="lmbody" class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Small modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+    </div>
+  </div>
+</div>
                         <h2>Customer details </h2><a class="btn btn-primary" href="#">Add customer</a>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
@@ -153,7 +192,8 @@ rs=null;
                                         <td><%=cs.getEmail()%></td>
                                         <td><a class="btn btn-danger" href="/AmanoraTown/DeleteCustomer?id=<%=cs.getId()%>">delete</a>
                                             <a class="btn btn-primary" href="/AmanoraTown/EditCustomer.jsp?id=<%=cs.getId()%>">Edit</a>
-                                            <a class="btn btn-primary" onclick='ajaxloader(<%=cs.getId()%>)'>View</a></td>
+                                             <a class="btn btn-primary" href="/AmanoraTown/viewcustomer.jsp?id=<%=cs.getId()%>">View</a>
+                                             <a class="btn btn-primary" onclick="ajaxloader(<%=cs.getId()%>)">MView</a>
                                     </tr>
                                     <% 
                                      }
@@ -161,6 +201,9 @@ rs=null;
                                 </tbody>
                                 
                             </table>
+                                
+                                
+
                         </div>
                     </div>
                 </div>
@@ -186,6 +229,28 @@ rs=null;
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+     <script>
+        function ajaxloader(id)
+        {
+            console.log(id);
+            $.ajax({url: "ViewCustomerAjax.jsp?id="+id, success: function(result){
+                    $('#myModal').modal('show');
+            //$("#div1").html(result);
+            //$('#myModal').on('shown.bs.modal', function () {
+            // $('#myInput').focus()
+//})
+            console.log(result);
+             document.getElementById('lmbody').innerHTML =result;
+            }});
+        }
+        //$.('#lmbody');
+     //$('lmbody').html("Not fine body");
+    
+    // console.log(document.getElementById('lmbody'));
+      
+     // document.getElementById(‘lmbody').innerHtml(“hi”);
+     // document.getElementById(“lmbody”).innerHTML = "Paragraph changed!";
+        </script>
 
 </body>
 

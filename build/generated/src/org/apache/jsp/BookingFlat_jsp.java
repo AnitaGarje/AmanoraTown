@@ -214,9 +214,9 @@ rs=null;
       out.write("                                            <a class=\"btn btn-primary\" href=\"/AmanoraTown/EditCustomer.jsp?id=");
       out.print(cs.getId());
       out.write("\">Edit</a>\n");
-      out.write("                                            <a class=\"btn btn-primary\" onclick='ajaxloader(");
+      out.write("                                             <a class=\"btn btn-primary\" href=\"/AmanoraTown/viewcustomer.jsp?id=");
       out.print(cs.getId());
-      out.write(")'>View</a></td>\n");
+      out.write("\">View</a>\n");
       out.write("                                    </tr>\n");
       out.write("                                    ");
  

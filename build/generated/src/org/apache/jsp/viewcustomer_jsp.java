@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import cust.Customer;
 
 public final class viewcustomer_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -47,6 +48,7 @@ public final class viewcustomer_jsp extends org.apache.jasper.runtime.HttpJspBas
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -133,8 +135,125 @@ public final class viewcustomer_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("        \n");
       out.write("        \n");
       out.write("       ");
+      out.write('\n');
+
+    java.sql.Connection con;
+java.sql.Statement s;
+java.sql.ResultSet rs;
+java.sql.PreparedStatement pst;
+
+con=null;
+s=null;
+pst=null;
+rs=null;
+Customer cs=new Customer();
+String driver = "com.mysql.jdbc.Driver";
+String connection = "jdbc:mysql://localhost/Amanora";
+String user = "root";
+String password = "";
+    try{
+        
+        Class.forName(driver); 
+        
+            con = java.sql.DriverManager.getConnection(connection, user, password); 
+            String str="Select * from customer where Id="+request.getParameter("id");
+            s=con.createStatement();
+            rs=s.executeQuery(str);
+            rs.next() ;
+            cs=new Customer(rs);
+            //out.println(cs.toString());
+            //out.println(request.getParameter("id"));
+            //pst=con.prepareStatement(sql)
+           // pst = con.prepareStatement(cs.ToSqlUpdate());
+          //  pst.executeUpdate();                         
+            
+   }
+   catch(Exception e){     
+       e.printStackTrace();
+       out.println("Something went wrong !! Please try again"); 
+       //out.println(username);  
+   }      
+
+    
+
       out.write("\n");
       out.write("\n");
+      out.write("   <div class=\"table-responsive\">\n");
+      out.write("                            <table class=\"table table-bordered table-hover table-striped\">\n");
+      out.write("                                <thead>\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <th>Column Name</th>\n");
+      out.write("                                        <th>Detail</th>\n");
+      out.write("                                        \n");
+      out.write("                                    </tr>\n");
+      out.write("                                </thead>\n");
+      out.write("                                <tbody>\n");
+      out.write("                                  \n");
+      out.write("                                    \n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td>Customer Name:</td>\n");
+      out.write("                                        <td> ");
+      out.print(cs.getFname());
+      out.write(' ');
+      out.print(cs.getMname());
+      out.write(' ');
+      out.print(cs.getLname());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                     <tr>\n");
+      out.write("                                        <td>Gender:</td>\n");
+      out.write("                                        <td> ");
+      out.print(cs.getGender());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td> Flat Name: </td>\n");
+      out.write("                                        <td>");
+      out.print(cs.getFlat());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td> Phone 1: </td>\n");
+      out.write("                                        <td>");
+      out.print(cs.getPhone1());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td> Phone 2: </td>\n");
+      out.write("                                        <td>");
+      out.print(cs.getPhone2());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td> Email: </td>\n");
+      out.write("                                       <td>");
+      out.print(cs.getEmail());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td> Present Address </td>\n");
+      out.write("                                       <td>");
+      out.print(cs.getAddress1());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                     <tr>\n");
+      out.write("                                        <td> Permanent Address </td>\n");
+      out.write("                                       <td>");
+      out.print(cs.getAddress2());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                     <tr>\n");
+      out.write("                                        <td> Permanent Address </td>\n");
+      out.write("                                       <td>");
+      out.print(cs.getAddress3());
+      out.write("</td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                   \n");
+      out.write("                                   \n");
+      out.write("                                </tbody>\n");
+      out.write("                                \n");
+      out.write("                            </table>\n");
+      out.write("                        </div>\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
